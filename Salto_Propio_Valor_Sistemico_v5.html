@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#112D2A">
+<title>Salto Propio · Estrategia de Valor Sistémico · Entrega 4</title>
+<style>
+  :root { --ink:#112d2a; --ink2:#173b35; --paper:#f6f4ed; --lime:#dbf26a; --coral:#f98667; --violet:#d8cffa; --soft:#e7f2ed; --muted:#62746f; --sans:'Inter Display','Inter',Arial,sans-serif; }
+  * {box-sizing:border-box} html,body {width:100%;height:100%;margin:0;overflow:hidden;background:#091e1b;color:var(--ink);font-family:var(--sans)}
+  button {font:inherit} #app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 30%,#274943 0%,#091e1b 75%)}
+  #stage {position:relative;width:1280px;height:720px;flex:none;overflow:hidden;border-radius:2px;transform-origin:center center;background:var(--paper);box-shadow:0 40px 120px rgba(0,0,0,.5)}
+  .slide{position:absolute;inset:0;display:none;overflow:hidden;padding:90px 72px 65px;isolation:isolate}
+  .slide.active{display:block;animation:appear .42s cubic-bezier(.18,.7,.22,1) both} @keyframes appear {from{opacity:.3;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .slide.cream{background:var(--paper)} .slide.dark{background:var(--ink);color:var(--paper)} .slide.lavender{background:#efebfa} .slide.peach{background:#fff1e6} .slide.mint{background:#e9f1e8} .slide.cloud{background:#eef1f4}
+  .topbar{position:absolute;top:37px;left:72px;right:72px;display:flex;align-items:center;justify-content:space-between;font-weight:750;letter-spacing:1.8px;font-size:12px;text-transform:uppercase;z-index:10}
+  .brandline{display:flex;align-items:center;gap:10px}.brandmark{width:24px;height:24px;border:1.7px solid currentColor;display:inline-grid;place-items:center;border-radius:50%;font-size:19px;font-weight:500;line-height:1;transform:rotate(-16deg)}
+  .chapter{font-size:12px;letter-spacing:2.4px;text-transform:uppercase;font-weight:800;display:flex;align-items:center;gap:12px;margin:0 0 21px;color:#58716b}.chapter:before{content:'';width:25px;height:2px;background:currentColor}.dark .chapter{color:var(--lime)}
+  h1,h2,h3,p{margin:0} h1{font-size:91px;line-height:.98;letter-spacing:-6px;font-weight:850} h2{font-size:70px;line-height:1.03;letter-spacing:-4.5px;font-weight:830} h3{font-size:26px;line-height:1.15;letter-spacing:-.8px;font-weight:800}
+  .sub{font-size:23px;line-height:1.34;letter-spacing:-.7px;color:var(--muted)} .dark .sub{color:#c2d1c9} .accent{color:var(--coral)} .lime{color:var(--lime)} .italic{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:500;letter-spacing:-6px}
+  .tiny{font-size:13px;line-height:1.5;color:var(--muted)} .micro{font-size:11px;letter-spacing:1px;font-weight:700;text-transform:uppercase}
+  .foot{position:absolute;bottom:29px;left:72px;right:72px;z-index:3;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:650;letter-spacing:1.1px;text-transform:uppercase;color:rgba(17,45,42,.55)}.dark .foot{color:rgba(247,246,237,.5)}
+  .foot .slidex{font-size:12px;font-weight:850;color:inherit}.corner-symbol{position:absolute;right:-105px;bottom:-100px;width:430px;height:430px;border:75px solid rgba(17,45,42,.045);border-radius:50%;z-index:-1}
+  .pill{display:inline-flex;align-items:center;gap:9px;padding:10px 15px;border-radius:999px;background:var(--lime);color:var(--ink);font-weight:850;font-size:13px;letter-spacing:.2px}
+  .label{font-size:11px;letter-spacing:1.9px;font-weight:800;text-transform:uppercase}
+  .hero-copy{position:relative;z-index:2;width:730px;padding-top:53px}.hero-copy h1{margin:25px 0 25px;max-width:730px}.hero-copy .sub{width:550px;font-size:23px}.hero-ring{position:absolute;right:-156px;top:80px;width:660px;height:660px;border:126px solid var(--lime);border-radius:50%;filter:drop-shadow(0 38px 80px rgba(0,0,0,.22));transform:rotate(-20deg)}.hero-ring:after{content:'';position:absolute;inset:-184px;border:1px dashed rgba(219,242,106,.3);border-radius:50%}
+  .orb{position:absolute;display:grid;place-items:center;border-radius:22px;padding:18px 21px;font-weight:800;font-size:15px;box-shadow:0 16px 43px rgba(0,0,0,.16);z-index:3}.orb small{display:block;font-size:12px;margin-top:5px;font-weight:550;opacity:.7}.orb.a{top:215px;right:200px;background:#f8f6ed;color:var(--ink);transform:rotate(-8deg)}.orb.b{top:380px;right:63px;background:#e4dcfb;color:var(--ink);transform:rotate(7deg)}.orb.c{top:492px;right:317px;background:var(--coral);color:var(--ink);transform:rotate(-5deg)}
+  .hero-chip{position:absolute;left:73px;bottom:102px;color:#b7c7be;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700}
+  .problem-title{max-width:820px}.problem-grid{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.problem{height:210px;border-radius:24px;background:#fff;padding:25px;position:relative;box-shadow:0 14px 30px rgba(38,59,49,.065)}.problem .index{display:block;color:#8fa19b;font-size:13px;font-weight:800;letter-spacing:1.5px}.problem h3{margin-top:22px;font-size:32px}.problem p{font-size:16px;line-height:1.4;margin-top:11px;color:#526862;max-width:250px}.problem .badgecircle{position:absolute;right:22px;top:21px;width:54px;height:54px;background:var(--lime);display:grid;place-items:center;border-radius:50%;font-size:25px}.problem:nth-child(2) .badgecircle{background:#fce2d6}.problem:nth-child(3) .badgecircle{background:var(--violet)}
+  .quote-band{margin-top:18px;border-radius:15px;background:var(--ink);color:var(--paper);padding:17px 25px;font-size:19px;letter-spacing:-.45px;font-weight:730}
+  .network-head{max-width:950px}.network{position:absolute;left:92px;right:92px;top:267px;height:310px}.network svg{position:absolute;inset:0;overflow:visible}.network line{stroke:#b8aad8;stroke-width:3;stroke-dasharray:8 10}.net-center{position:absolute;left:417px;top:82px;width:265px;height:135px;background:var(--ink);color:white;border-radius:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 22px 34px rgba(24,34,34,.19)}.net-center strong{font-size:25px;font-weight:850;letter-spacing:-1px}.net-center span{color:#c6d8d1;font-size:13px;line-height:1.3;width:190px;margin-top:10px}.net-node{position:absolute;background:#fff;border:1px solid #ddd7ec;box-shadow:0 13px 29px rgba(49,38,67,.07);border-radius:19px;padding:20px 21px;width:255px;min-height:99px}.net-node strong{font-size:19px;display:block}.net-node span{font-size:13px;color:#60726e;line-height:1.3;display:block;margin-top:7px}.net-node.i{left:13px;top:8px}.net-node.ii{right:9px;top:8px}.net-node.iii{left:13px;bottom:0}.net-node.iv{right:9px;bottom:0}.network-strap{position:absolute;left:72px;right:72px;bottom:100px;font-size:16px;font-weight:780;display:flex;gap:8px}.network-strap span{background:#dbd2f7;padding:10px 20px;border-radius:200px}
+  .allies-title{max-width:920px}.ally-grid{display:grid;grid-template-columns:1fr 1fr;gap:23px;margin-top:24px}.ally{position:relative;min-height:284px;border:1.5px solid rgba(23,59,53,.1);border-radius:28px;padding:23px 31px 17px;background:rgba(255,255,255,.8);overflow:hidden}.ally .ally-num{font-size:12px;letter-spacing:2px;font-weight:800;color:#6a8379}.ally h3{font-size:35px;margin:10px 0 17px}.ally .mini{font-size:16px;line-height:1.38;color:#546a62;max-width:400px}.ally .large-stat{font-size:56px;line-height:1;letter-spacing:-3px;font-weight:850;margin:13px 0 6px}.ally .large-stat sup{font-size:21px;vertical-align:20px}.ally .stat-caption{font-size:15px;font-weight:780}.ally .ally-sticker{position:absolute;right:26px;top:26px;width:68px;height:68px;background:#dbf26a;border-radius:22px;display:grid;place-items:center;font-size:33px;transform:rotate(9deg)}.ally:nth-child(2) .ally-sticker{background:#d9cff8;transform:rotate(-8deg)}.ally-bottom{border-top:1px solid #dce1d8;margin-top:14px;padding-top:12px;font-size:13px;color:#576d63}.allies-future{margin-top:18px;font-size:13px;line-height:1.4;color:#60756b;display:flex;gap:12px;align-items:center}.allies-future strong{color:var(--ink)}
+  .money-title{max-width:910px}.money-main{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;margin-top:26px}.breakdown{background:rgba(255,255,255,.67);border:1px solid rgba(17,45,42,.08);border-radius:25px;padding:26px}.ticket-value{font-size:71px;letter-spacing:-4.5px;line-height:1;font-weight:900}.ticket-value small{font-size:20px;letter-spacing:0;font-weight:600;color:#648076;display:block;margin-bottom:7px}.stack{height:37px;border-radius:11px;display:flex;overflow:hidden;margin:27px 0 18px;background:#fafafa}.stack div{height:100%;border-right:3px solid #e9f1e8}.stack .worker{width:51.724%;background:#1f6f5b}.stack .club{width:7%;background:#b3d875}.stack .travel{width:1.15%;background:#a7aea6}.stack .iibb{width:6%;background:#f6a489}.stack .fee{width:34.126%;background:#d6cef2;border-right:0}.legend{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:12px}.legenditem{display:flex;align-items:start;gap:9px;font-size:13px;color:#52655b;line-height:1.3}.legenditem b{display:block;color:var(--ink);font-size:15px}.dot{flex:none;width:11px;height:11px;border-radius:50%;margin-top:4px}.profit-card{border-radius:25px;background:var(--ink);padding:30px;color:var(--paper);position:relative;overflow:hidden}.profit-card:after{content:'';position:absolute;width:220px;height:220px;right:-82px;bottom:-85px;border:42px solid rgba(219,242,106,.12);border-radius:50%}.profit-card .eyebrow{font-size:12px;font-weight:750;letter-spacing:1.7px;text-transform:uppercase;color:var(--lime)}.profit-card .profit-num{font-size:85px;font-weight:850;letter-spacing:-5px;line-height:1;margin:15px 0}.profit-card p{font-size:17px;line-height:1.45;color:#d1dbd4}.profit-card .formula{margin-top:28px;padding-top:17px;border-top:1px solid #416056;font-size:14px;line-height:1.65;color:#bad0c5}.profit-card .formula b{color:white}
+  .growth-title{max-width:890px}.growth-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:27px}.metric{border-radius:22px;background:#fff;min-height:160px;padding:20px 23px;box-shadow:0 9px 23px rgba(23,39,54,.055)}.metric .key{font-size:59px;line-height:1.05;letter-spacing:-3px;font-weight:860}.metric .tag{font-size:14px;color:#5f726c;margin-top:11px;font-weight:650}.metric:last-child{background:#d8f0b8}.growth-bottom{margin-top:22px;display:grid;grid-template-columns:1.1fr .9fr;gap:20px}.composition{padding:21px 24px;border-radius:21px;background:#fff}.composition h3{font-size:19px;margin-bottom:16px}.composition .cols{display:flex;gap:6px}.compo{height:12px;border-radius:5px;background:#2b6c59}.compo.exp{background:#97a8ee}.compo.pro{background:#f69a7e}.compo.mesa{background:#f3d66a;min-width:7px}.comp-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-top:14px;font-size:13px;color:#4f665e}.comp-legend b{color:var(--ink)}.assumption{padding:22px 25px;border-radius:21px;background:var(--ink);color:white}.assumption .label{color:var(--lime)}.assumption p{font-size:20px;line-height:1.32;margin-top:12px;font-weight:750;letter-spacing:-.5px}.assumption span{display:block;color:#bdd3c8;font-size:13px;line-height:1.4;margin-top:13px}
+  .results-title{max-width:930px}.results-grid{margin-top:29px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:17px}.result{padding:23px 23px 25px;border:1px solid rgba(245,246,237,.16);border-radius:25px;min-height:237px;background:rgba(255,255,255,.045)}.result.primary{background:var(--lime);border-color:var(--lime);color:var(--ink)}.result .eyebrow{font-size:12px;line-height:1.3;letter-spacing:1.2px;text-transform:uppercase;font-weight:760;opacity:.68;min-height:35px}.result .r-number{font-size:70px;line-height:1;letter-spacing:-4px;font-weight:880;margin:21px 0 9px}.result .r-sub{font-size:15px;line-height:1.4;font-weight:660}.result .r-evolution{margin-top:14px;opacity:.85;font-size:13px}.results-sub{margin-top:21px;display:flex;gap:11px}.results-sub .levers{padding:12px 18px;border-radius:999px;background:#284840;color:#e6eeda;font-size:14px}.results-sub b{color:var(--lime)}.results-warning{margin-top:14px;color:#b9ccc1;font-size:13px}
+
+  /* Slide 05 — Objetivos de Desarrollo Sostenible */
+  .sdg-intro{max-width:1080px}.sdg-intro .chapter{margin-bottom:13px}.sdg-intro h2{font-size:61px;line-height:.98;letter-spacing:-3.8px}
+  .sdg-sub{font-size:18px;line-height:1.4;color:#63786f;margin-top:8px;max-width:970px}
+  .sdg-columns{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:21px}
+  .sdg-group{position:relative;min-width:0}
+  .sdg-grouphead{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:850;letter-spacing:1.7px;text-transform:uppercase;margin-bottom:10px;color:#587267}
+  .sdg-grouphead .sdg-mark{display:inline-flex;align-items:center;justify-content:center;min-width:112px;padding:8px 12px;background:#d7e6df;border-radius:999px;color:#234a3f;letter-spacing:1px}
+  .sdg-group.new .sdg-mark{background:#fcd6c7;color:#8e402b}
+  .sdg-grouphead:after{content:'';flex:1;height:1px;background:rgba(17,45,42,.18)}
+  .sdg-card{background:#fff;border:1px solid rgba(17,45,42,.08);box-shadow:0 15px 33px rgba(34,67,53,.075);border-radius:20px;display:flex;align-items:center;gap:18px;height:109px;padding:15px 20px;margin-bottom:10px}
+  .sdg-number{flex:none;width:73px;height:73px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:17px;background:#c5192d}
+  .sdg-number span{font-size:10px;font-weight:800;letter-spacing:1.3px;line-height:1.1}
+  .sdg-number b{font-size:37px;font-weight:880;letter-spacing:-2px;line-height:.99}
+  .sdg-number.n8{background:#a21942}.sdg-number.n1{background:#e5243b}.sdg-number.n2{background:#dda63a}
+  .sdg-content h3{font-size:22px;letter-spacing:-.65px;margin-bottom:7px;white-space:nowrap}
+  .sdg-content p{font-size:14px;line-height:1.27;color:#5d7069;max-width:410px}
+  .sdg-content .sdg-meta{font-weight:850;color:#234b42}
+  .sdg-statement{display:flex;align-items:center;justify-content:center;gap:13px;margin-top:5px;background:var(--ink);color:#e8f0e6;border-radius:17px;padding:13px 20px;font-size:17px;font-weight:730;letter-spacing:-.3px}
+  .sdg-statement b{color:var(--lime)}
+  .ending-content{position:relative;z-index:2;margin-top:51px}.ending-content h2{font-size:89px;line-height:1.03;max-width:1060px}.ending-content h2 .italic{color:#347d63}.ending-content .sub{font-size:25px;margin-top:23px;max-width:770px}.ending-bottom{position:absolute;left:72px;bottom:104px;display:flex;gap:9px}.ending-bottom span{border:1px solid #c6d4cc;color:#3a554d;padding:12px 18px;border-radius:999px;font-size:13px;font-weight:770}.ending-spot{position:absolute;right:-180px;bottom:-278px;width:620px;height:620px;border:116px solid var(--lime);border-radius:50%;z-index:0}
+  #hud{position:absolute;bottom:17px;right:28px;display:flex;gap:8px;align-items:center;z-index:20;background:rgba(16,38,33,.88);padding:8px;border:1px solid rgba(255,255,255,.14);border-radius:45px;color:white;box-shadow:0 12px 33px rgba(0,0,0,.17)}
+  .ctrl{background:transparent;border:0;color:inherit;height:28px;min-width:29px;border-radius:999px;cursor:pointer;display:grid;place-items:center;font-size:18px;line-height:1;padding:0 6px}.ctrl:hover{background:rgba(255,255,255,.18)}.ctrl:focus-visible{outline:2px solid var(--lime)}.ctrl:disabled{opacity:.3;cursor:default}.ctrl .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
+  #timer{font-size:12px;font-weight:720;min-width:80px;display:inline-flex;justify-content:center;align-items:center;letter-spacing:.5px;color:#d8f0df;cursor:pointer;user-select:none}#timer.over{color:#ffb098}
+  #progress{position:absolute;left:0;bottom:0;height:5px;width:12.5%;background:var(--coral);z-index:40;transition:width .3s ease}
+  #notesPanel{display:none;position:absolute;z-index:22;right:22px;top:85px;width:438px;max-height:520px;overflow:auto;border-radius:21px;background:#fffefa;color:var(--ink);padding:25px 27px 24px;box-shadow:0 30px 100px rgba(0,0,0,.29);border:1px solid #e7e4d6}#notesPanel.show{display:block}.noteshead{display:flex;justify-content:space-between;align-items:start;gap:10px}.noteshead h3{font-size:18px}.noteshead small{display:block;font-size:12px;font-weight:800;color:#71887e;margin-bottom:6px}.notestext{font-size:16px;line-height:1.59;margin-top:15px;color:#345047}.noteclose{border:none;background:#e9efeb;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:22px}
+  #helpPanel{display:none;position:absolute;z-index:25;inset:0;align-items:center;justify-content:center;background:rgba(11,31,27,.74)}#helpPanel.show{display:flex}#helpCard{background:white;width:460px;border-radius:28px;padding:35px 38px;box-shadow:0 30px 100px rgba(0,0,0,.25)}#helpCard h3{margin-bottom:20px}.helprow{display:flex;justify-content:space-between;margin:13px 0;color:#486059;font-size:17px}.keycap{padding:5px 10px;background:#edf2ef;border:1px solid #d3ded8;border-radius:7px;color:var(--ink);font-weight:800;font-size:14px}
+  @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+  @media print { @page{size:landscape;margin:0} html,body{overflow:visible!important;width:100%;height:auto;background:white} #app{position:static;display:block;background:white} #stage{transform:none!important;width:1280px!important;height:auto!important;box-shadow:none;overflow:visible} .slide{display:block!important;position:relative!important;height:720px;page-break-after:always;break-after:page} #hud,#progress,#notesPanel,#helpPanel{display:none!important}}
+
+
+/* Adaptación al esquema solicitado por la profesora */
+.context-wrap{display:grid;grid-template-columns:1.07fr .93fr;gap:25px;margin-top:30px}
+.context-main{background:#fff;border-radius:25px;padding:26px 32px;box-shadow:0 12px 30px rgba(24,50,39,.06)}
+.context-main .intro-quote{font-size:26px;line-height:1.22;letter-spacing:-1px;font-weight:800;margin:11px 0 14px}
+.context-main .intro-copy{font-size:16px;line-height:1.47;color:#527065}
+.context-right{display:grid;grid-template-rows:1fr 1fr;gap:13px}
+.context-item{background:#e2f1e7;border-radius:23px;padding:23px 27px}
+.context-item:nth-child(2){background:#e9e2fb}
+.context-item strong{font-size:27px;letter-spacing:-1.1px;display:block;margin:7px 0 8px}
+.context-item p{font-size:15px;line-height:1.4;color:#506b62}
+.context-item .mini-tag{font-size:11px;letter-spacing:1.6px;font-weight:850;text-transform:uppercase;color:#5b756c}
+.sdg-inline{display:flex;gap:11px;margin-top:18px}.sdg-inline span{padding:10px 16px;background:#183b34;color:white;border-radius:12px;font-size:14px;font-weight:750}.sdg-inline b{color:var(--lime)}
+.new-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:27px}.new-card{background:#fff;border-radius:24px;padding:24px 25px 22px;min-height:227px;box-shadow:0 10px 25px rgba(0,0,0,.045)}.new-card .new-icon{font-size:29px;display:grid;place-items:center;border-radius:15px;width:53px;height:53px;background:#e0ecd8}.new-card:nth-child(2) .new-icon{background:#f6dbc9}.new-card:nth-child(3) .new-icon{background:#e5ddf8}.new-card h3{font-size:27px;margin-top:14px}.new-card p{font-size:15px;line-height:1.4;color:#5e7069;margin-top:10px}.ods-new{display:flex;gap:15px;margin-top:18px}.ods-new span{flex:1;border-radius:15px;background:#1c4236;color:#fff;padding:15px 19px;font-size:17px;font-weight:700}.ods-new b{color:var(--lime)}
+.allies-sub{font-size:16px;color:#5a6f65;margin-top:9px}
+.ally-grid{margin-top:28px}.ally{min-height:277px}.ally .ally-bottom{margin-top:12px}
+.proof-strip{margin-top:18px;border-radius:16px;background:#fff9ec;padding:15px 22px;display:flex;justify-content:space-between;gap:18px;font-size:15px;font-weight:750;color:#29483a}
+.fin-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}.fin-head h2{font-size:62px}.fin-micro{font-size:16px;color:#61786f;max-width:340px;text-align:right;line-height:1.4}
+.fin-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:22px}
+.fin-stat{background:#fff;border-radius:24px;padding:24px 28px}
+.fin-stat .big{font-size:64px;line-height:1;font-weight:860;letter-spacing:-4px}.fin-stat .desc{font-size:14px;color:#5b746a;line-height:1.4;margin-top:10px}
+.fin-compare{display:flex;align-items:center;gap:12px;margin-top:19px}.fin-compare span{font-size:13px;font-weight:800}.fin-compare .track{height:17px;border-radius:9px;background:#d6e2d9;flex:1;position:relative}.fin-compare .fill{height:100%;width:55.1%;background:#327e62;border-radius:9px}
+.fin-compare .fill.optim{width:100%;background:var(--lime)}
+.fin-levers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.fin-lever{border-radius:20px;background:#fff;padding:20px 23px}.fin-lever b{font-size:32px;letter-spacing:-1.5px}.fin-lever p{font-size:15px;color:#60736b;margin-top:8px;line-height:1.35}
+.fin-bottom{margin-top:16px;font-size:14px;color:#b9d2c5;line-height:1.4}
+.compare-table{width:100%;border-collapse:separate;border-spacing:0 12px;margin-top:25px;table-layout:fixed}
+.compare-table th{font-size:14px;letter-spacing:1px;text-transform:uppercase;text-align:center;padding:13px 10px;background:#e2ebe3;color:#527164}
+.compare-table th:first-child{text-align:left;border-radius:15px 0 0 15px;width:25%}.compare-table th:last-child{border-radius:0 15px 15px 0;background:#d4ed9b;color:#294634}
+.compare-table td{padding:19px 15px;background:#fff;text-align:center;font-size:21px;font-weight:770;border-top:1px solid #e7ece6;border-bottom:1px solid #e7ece6}
+.compare-table td:first-child{border-radius:15px 0 0 15px;text-align:left;font-size:16px;color:#53695f;font-weight:730}
+.compare-table td:last-child{border-radius:0 15px 15px 0;background:#e9f3d5;color:#234939;font-weight:850}
+.compare-table tr.profit td{font-size:29px;letter-spacing:-1px}.compare-table tr.profit td:first-child{font-size:16px;letter-spacing:0}
+.compare-foot{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:17px}.compare-foot .key-message{font-size:18px;font-weight:800;background:#1b3e35;color:#f4f5e9;border-radius:16px;padding:16px 22px}.compare-foot .key-message b{color:var(--lime)}.compare-foot .note{font-size:13px;line-height:1.4;color:#597268;max-width:350px}
+#hud {bottom:15px;right:20px}
+#progress{height:4px}
+
+/* Finishing adjustments for 16:9 projection */
+.compare-table{border-spacing:0 5px;margin-top:17px}
+.compare-table th{padding:9px 10px;font-size:12px}
+.compare-table td{padding:12px 13px;font-size:19px}
+.compare-table tr.profit td{font-size:26px}
+.compare-table tr.profit td:first-child{font-size:15px}
+.compare-foot{margin-top:6px}
+.compare-foot .key-message{font-size:15px;padding:11px 16px}
+.compare-foot .note{font-size:11px}
+.context-wrap{margin-top:24px}
+.context-main{padding:24px 30px}
+.context-item{padding:20px 26px}
+.ally-grid{margin-top:23px}
+.ally{padding:19px 25px 15px}
+.ally .large-stat{margin:8px 0 5px}
+.ally .ally-bottom{margin-top:10px}
+
+/* Propósito textual de Entrega 4: preservar completo y legible. */
+.context-main .intro-quote{font-size:23px;line-height:1.25;letter-spacing:-.65px;font-weight:780;margin:12px 0 24px;}
+/* Contraste accesible: tarjetas claras sobre diapositivas oscuras. */
+.slide.dark .fin-stat {color:#112d2a;}
+.slide.dark .fin-stat .big {color:#112d2a;}
+.slide.dark .fin-stat .label {color:#4a6e60;}
+.slide.dark .fin-stat .desc {color:#3c5e53;}
+.slide.dark .fin-stat .fin-compare span {color:#234a3e;}
+.slide.dark .fin-stat .fin-compare .track {background:#d5e3da;}
+.slide.dark .fin-stat .fin-compare .fill.optim {background:#91b72d;}
+.slide.dark .fin-stat[style*="background:#d9f26a"] .label {color:#294938;}
+.slide.dark .fin-stat[style*="background:#d9f26a"] .big {color:#112d2a;}
+
+/* Slide 7 readability fix */
+.slide.cream .chapter{color:#6d7f62}
+.slide.cream .chapter:before{background:#a6bf57}
+.slide.cream .topbar span:last-child{color:#183b34}
+.slide.cream .compare-table th{background:#dde6de;color:#35544c}
+.slide.cream .compare-table th:last-child{background:#9fbe4f;color:#17352f}
+.slide.cream .compare-table td:last-child{background:#dfeab8;color:#17352f}
+.slide.cream .compare-foot .key-message b{color:#d9f26a}
+.slide.cream .compare-foot .note{color:#48645a}
+
+
+/* ===== v2 slides 5-7 ===== */
+.n-h2{font-size:46px;letter-spacing:-2.8px;line-height:1.02}
+.s5 .money-main{margin-top:18px;gap:20px;grid-template-columns:1.1fr .9fr}.s5 .breakdown{padding:20px 24px}.s5 .ticket-value{font-size:54px;letter-spacing:-3px}.s5 .stack{margin:14px 0 12px}.s5 .legend{row-gap:8px}
+.pro-steps{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(17,45,42,.1);font-size:14px;color:#52655b}.pro-steps .ps{background:#fff;border-radius:12px;padding:7px 11px;line-height:1.25}.pro-steps .ps b{display:block;font-size:19px;color:var(--ink)}.pro-steps .ps.now{background:#1f6f5b;color:#d8efe4}.pro-steps .ps.now b{color:#fff}
+.s5 .profit-card{padding:22px 26px}.casc{margin-top:12px}.crow{margin-bottom:10px}.crow .ct{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;color:#bad0c5}.crow .ct b{color:#fff;font-size:20px}.cbar{height:11px;border-radius:6px;background:#2c4a42;margin-top:4px}.cbar i{display:block;height:100%;border-radius:6px;background:#d6cef2}.cbar i.neg{background:var(--coral)}.cbar i.res{background:var(--lime)}.crow.res .ct b{color:var(--lime);font-size:34px;letter-spacing:-1.5px}.cnote{font-size:14px;color:#bad0c5;margin-top:4px;line-height:1.35}
+.s5notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.snote{display:flex;gap:12px;align-items:center;background:var(--ink);color:#e8f0e6;border-radius:18px;padding:13px 18px;font-size:15px;line-height:1.35}.snote .ic{font-size:24px}.snote b{color:var(--lime)}
+.b3row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}.b3{background:#1b3f37;border-radius:18px;padding:10px 18px}.b3 b{display:block;font-size:44px;letter-spacing:-2.5px;color:var(--lime);line-height:1}.b3 span{font-size:14px;color:#c2d1c9}
+.s6cols{display:grid;grid-template-columns:470px 1fr;gap:22px;margin-top:14px}.lev{display:grid;grid-template-columns:1fr 1fr;gap:10px}.lv{background:#284940;border-radius:16px;padding:11px 14px}.lv b{font-size:30px;color:var(--lime);letter-spacing:-1.5px;display:block;line-height:1.1}.lv p{font-size:14px;color:#d4e1d8;line-height:1.3}
+.eb{margin-top:10px;background:#1b3f37;border-radius:18px;padding:12px 18px}.eb .lbl{font-size:12px;letter-spacing:1.8px;font-weight:800;text-transform:uppercase;color:#8fb3a3;margin-bottom:8px}.ebr{display:flex;align-items:center;gap:10px;margin-bottom:7px;font-size:15px}.ebr span{width:84px;flex:none;color:#c2d1c9}.ebr .tr{flex:1;height:24px;background:#122e29;border-radius:8px;overflow:hidden}.ebr .tr i{display:block;height:100%;border-radius:8px;background:#7f958c}.ebr .tr i.o{background:var(--lime)}.ebr b{width:80px;text-align:right;font-size:18px}
+.eq{margin-top:10px;background:var(--lime);color:var(--ink);border-radius:18px;padding:11px 18px;display:flex;align-items:center;gap:14px}.eq b{font-size:36px;letter-spacing:-2px;white-space:nowrap}.eq p{font-size:14px;line-height:1.3;color:#385647}.n6warn{font-size:14px;color:#9db5aa;margin-top:9px;line-height:1.35}
+.chartcard{background:var(--paper);border-radius:20px;padding:12px 14px 6px;color:var(--ink)}.chartcard h4{margin:0;font-size:19px;letter-spacing:-.5px}.chartcard .cs{font-size:14px;color:#52655b;margin-bottom:2px}.chartcard svg{display:block;width:100%;height:auto}
+.s7t{width:100%;border-collapse:separate;border-spacing:0 8px;margin-top:12px}.s7t th{font-size:14px;text-align:left;padding:6px 18px;color:#58716b;letter-spacing:1.4px;text-transform:uppercase}.s7t th.sys{color:#1f6f5b}.s7t td{background:#fff;padding:9px 18px;font-size:22px;font-weight:700}.s7t td:first-child{border-radius:14px 0 0 14px;font-size:18px;color:#3e5a52;width:38%}.s7t td:last-child{border-radius:0 14px 14px 0;background:#e3f3a8;font-size:28px;font-weight:850}.s7t .d{font-size:14px;font-weight:750;margin-left:10px;color:#1f6f5b;background:#fff;border-radius:999px;padding:3px 10px;letter-spacing:0;vertical-align:middle}
+.s7msg{margin-top:8px;background:var(--ink);color:var(--paper);border-radius:18px;padding:15px 24px;font-size:24px;font-weight:780;letter-spacing:-.6px}.s7msg b{color:var(--lime)}.s7close{margin-top:14px;font-size:20px;line-height:1.4;color:#3e5a52;border-left:4px solid #1f6f5b;padding-left:16px}.s7close b{color:var(--ink)}
+
+/* ===== v3 movimiento y ajustes ===== */
+@keyframes spin{from{transform:rotate(-20deg)}to{transform:rotate(340deg)}}@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes rise{from{opacity:0;translate:0 20px}to{opacity:1;translate:0 0}}@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}@keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0 round 11px)}to{clip-path:inset(0 0 0 0 round 11px)}}@keyframes pop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:scale(1)}}
+.hero-ring{animation:spin 32s linear infinite}.orb{animation:floaty 5s ease-in-out infinite}.orb.b{animation-delay:-1.6s}.orb.a{animation-delay:-3.2s}.orb:nth-of-type(n+3){animation-delay:-2.4s}
+.slide.active:not(:first-of-type)>*:not(.topbar):not(.foot):not(.corner-symbol):not(.deco){animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.slide.active>:nth-child(3){animation-delay:.05s}.slide.active>:nth-child(4){animation-delay:.14s}.slide.active>:nth-child(5){animation-delay:.24s}.slide.active>:nth-child(6){animation-delay:.34s}.slide.active>:nth-child(7){animation-delay:.44s}.slide.active>:nth-child(8){animation-delay:.54s}
+.gb,.pp,.pop{transform-box:fill-box;transform-origin:center}.gb{transform-origin:bottom;animation:growY .8s cubic-bezier(.2,.7,.2,1) both}.gb.gn{transform-origin:top}.pp{animation:pop .5s cubic-bezier(.3,1.5,.4,1) both}
+.slide.active .stack{animation:wipe 1s .3s cubic-bezier(.2,.7,.2,1) both}.slide.active .cbar i,.slide.active .ebr .tr i{transform-origin:left;animation:growX .9s .5s cubic-bezier(.2,.7,.2,1) both}
+.crow:nth-child(2) .cbar i{animation-delay:.7s!important}.crow:nth-child(3) .cbar i{animation-delay:.9s!important}.crow:nth-child(4) .cbar i{animation-delay:1.1s!important}.ebr:nth-child(3) .tr i{animation-delay:.9s!important}
+.slide.active .pro-steps .ps{animation:pop .5s both}.pro-steps .ps:nth-of-type(1){animation-delay:.8s!important}.pro-steps .ps:nth-of-type(2){animation-delay:1s!important}.pro-steps .ps:nth-of-type(3){animation-delay:1.2s!important}
+.slide.active .s7t tbody tr{animation:fade .6s both}.s7t tr:nth-child(1){animation-delay:.3s!important}.s7t tr:nth-child(2){animation-delay:.5s!important}.s7t tr:nth-child(3){animation-delay:.7s!important}.s7t tr:nth-child(4){animation-delay:.9s!important}
+.s7t .d{display:inline-block}.slide.active .s7t .d{animation:pop .5s 1.2s both}
+.s5 .legend{grid-template-columns:1fr;row-gap:5px}.s5 .legenditem{align-items:center;font-size:14px}.s5 .legenditem>div{display:flex;gap:10px;align-items:baseline}.s5 .legenditem b{display:inline;min-width:72px;font-size:16px}.s5 .legenditem .dot{margin-top:0;align-self:center}
+.s5 .ticket-value{font-size:48px}.s5 .profit-card{display:flex;flex-direction:column;justify-content:space-between}.s5 .casc{margin-top:8px;flex:1;display:flex;flex-direction:column;justify-content:space-between}.s5 .crow{margin-bottom:0}.s5 .cbar{height:14px}.s5 .cnote{margin-top:0}.s5notes{align-items:stretch}.snote{min-height:58px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* ===== v5 movimiento ambiente (queda en loop) ===== */
+@keyframes spinr{to{transform:rotate(360deg)}}@keyframes spinl{to{transform:rotate(-360deg)}}
+@keyframes drift{0%,100%{translate:0 0}25%{translate:14px -18px}50%{translate:-8px -34px}75%{translate:-18px -12px}}
+@keyframes pulse{0%{transform:scale(.4);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+.deco{position:absolute;inset:0;z-index:-1;pointer-events:none;--c:rgba(17,45,42,.2);--dot:#f98667;--d1:#1f6f5b;--d2:#9b86e0}.dark .deco{--c:rgba(219,242,106,.3);--dot:#dbf26a;--d1:#dbf26a;--d2:#f98667}
+.deco i{position:absolute;display:block}
+.deco .r1{width:420px;height:420px;right:-130px;top:-180px;border:3px dashed var(--c);border-radius:50%;animation:spinr 45s linear infinite}
+.deco .r2{width:120px;height:120px;right:130px;top:34px;border:2px solid var(--c);border-radius:50%;animation:spinl 14s linear infinite}
+.deco .r2:after{content:'';position:absolute;top:-8px;left:50%;margin-left:-8px;width:16px;height:16px;border-radius:50%;background:var(--dot)}
+.deco .r3{width:320px;height:320px;left:-120px;bottom:-150px;border:3px dashed var(--c);border-radius:50%;animation:spinl 55s linear infinite}
+.deco .r3:after{content:'';position:absolute;top:-9px;left:50%;margin-left:-9px;width:18px;height:18px;border-radius:50%;background:var(--d2)}
+.deco .o1{width:22px;height:22px;border-radius:50%;background:var(--d1);opacity:.55;left:46%;top:44px;animation:drift 9s ease-in-out infinite}
+.deco .o2{width:16px;height:16px;border-radius:50%;background:var(--dot);right:46px;bottom:150px;animation:drift 11s ease-in-out -3s infinite}
+.deco .o3{width:28px;height:28px;border-radius:50%;background:var(--d2);opacity:.5;left:26px;top:290px;animation:drift 13s ease-in-out -6s infinite}
+.deco .pl{width:46px;height:46px;border-radius:50%;border:3px solid var(--d1);left:52%;bottom:14px;animation:pulse 3.2s ease-out infinite}
+</style></head><body>
+<div id="app"><main id="stage" role="region" aria-label="Salto Propio · Valor sistémico">
+<section class="slide dark active" aria-label="Portada: Salto Propio"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
+  <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
+  <div class="hero-ring" aria-hidden="true"></div>
+  <div class="hero-copy"><h1>Del oficio a la <span class="italic lime">independencia.</span></h1><p class="sub">Una red de alianzas para emprender sin empezar de cero.</p></div>
+  <div class="orb a">CLUBES<small>Espacios disponibles</small></div><div class="orb b">ALIADOS<small>Capacidades compartidas</small></div><div class="orb c">PERSONAS<small>Talento y oficios</small></div>
+  <div class="hero-chip">ODS 1 · 2 · 4 · 8</div><div class="foot"><span>Sustentabilidad y Empresa · Grupo 2</span><span class="slidex">01 / 07</span></div>
+</section>
+<section class="slide cream" aria-label="ODS originales, poverty penalty y propósito"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
+  <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
+  <h2 style="font-size:63px">El talento existe.<br><span class="italic" style="color:#327b5b">Las barreras también.</span></h2>
+  <div class="context-wrap">
+    <div class="context-main"><span class="label">Nuestro propósito</span><div class="intro-quote">Ayudar a trabajadores en relación de dependencia que poseen un oficio, habilidad o experiencia a transformar ese conocimiento en un emprendimiento propio, reduciendo las barreras de capital, tiempo y riesgo que dificultan su transición hacia la independencia laboral.</div><div class="sdg-inline"><span><b>ODS 4</b> · Meta 4.4</span><span><b>ODS 8</b> · Metas 8.5 y 8.6</span></div></div>
+    <div class="context-right"><div class="context-item"><span class="mini-tag">Poverty penalty</span><strong>Emprender cuesta más cuando tenés menos recursos.</strong><p>Un local, herramientas y compras pequeñas pueden convertir la falta de capital en una barrera adicional.</p></div><div class="context-item"><span class="mini-tag">Nuestra respuesta inicial</span><strong>Activar lo que ya existe.</strong><p>Clubes aportan espacio y socios; mayoristas, insumos; Salto Propio, coordinación y reservas.</p></div></div>
+  </div><div class="foot"><span></span><span class="slidex">02 / 07</span></div>
+</section>
+<section class="slide peach" aria-label="Problemas nuevos y nuevos ODS"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
+  <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
+  <h2 style="font-size:62px">Emprender no depende<br>solo de tener <span class="italic" style="color:#dc7557">un local.</span></h2>
+  <div class="new-grid">
+    <article class="new-card"><div class="new-icon">$</div><h3>Financiamiento</h3><p>Capital para herramientas y crecimiento. También un espacio para emprendedoras que ya trabajan sin local.</p></article>
+    <article class="new-card"><div class="new-icon">✺</div><h3>Alimentación</h3><p>Un almuerzo saludable más accesible y, sobre todo, disponible en el mismo lugar de trabajo.</p></article>
+    <article class="new-card"><div class="new-icon">↗</div><h3>Tiempo y traslados</h3><p>Menos viajes durante la jornada. Se explora una alianza de movilidad, todavía fuera del modelo económico.</p></article>
+  </div>
+  <div class="ods-new"><span><b>ODS 1 · Meta 1.4</b> — Acceso a servicios financieros</span><span><b>ODS 2 · Meta 2.1</b> — Alimentación adecuada y accesible</span></div>
+  <div class="foot"><span></span><span class="slidex">03 / 07</span></div>
+</section>
+<section class="slide lavender" aria-label="Alianzas de valor sistémico"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
+  <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
+  <h2 style="font-size:63px">Dos alianzas.<br><span class="italic">Beneficios en ambas direcciones.</span></h2>
+  <div class="ally-grid">
+    <article class="ally"><div class="ally-sticker">✺</div><span class="ally-num">01 / MESA COMÚN</span><h3>Comida + tiempo</h3><p class="mini">Viandas saludables en el club, sin abandonar la jornada. Mesa Común amplía sus ventas; Salto Propio mejora la propuesta al profesional.</p><div class="large-stat">$7.650</div><div class="stat-caption">Precio promocional · Ahorro de $850 por vianda</div><div class="ally-bottom">1 club compartido · 553 viandas anuales proyectadas en el año 5 · Ingresos de Mesa Común</div></article>
+    <article class="ally"><div class="ally-sticker">✳</div><span class="ally-num">02 / PRO MUJER</span><h3>Crédito + red profesional</h3><p class="mini">Salto Propio deriva potenciales solicitantes; Pro Mujer podría derivar peluqueras y esteticistas que ya emprenden, pero no tienen local.</p><div class="large-stat">8</div><div class="stat-caption">Incorporaciones proyectadas al año 5</div><div class="ally-bottom">Posicionamiento institucional + nuevas profesionales · Sin comisiones financieras ni créditos garantizados</div></article>
+  </div>
+  <div class="allies-future"><strong>Próxima exploración</strong><span>→ Movilidad con Uber o DiDi para agrupar viajes; no se incluyen descuentos hipotéticos en las proyecciones.</span></div>
+  <div class="foot"><span></span><span class="slidex">04 / 07</span></div>
+</section>
+<section class="slide mint s5" aria-label="Modelo económico por visita"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
+  <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
+  <h2 class="n-h2">La red crece. <span class="italic">El valor se comparte.</span></h2>
+  <div class="money-main">
+    <div class="breakdown"><div class="ticket-value"><small>1 · Ticket promedio por visita</small><span data-cu="69600" data-pre="$">$69.600</span></div><div class="stack" aria-label="Distribución por visita"><div class="worker"></div><div class="club"></div><div class="travel"></div><div class="iibb"></div><div class="fee"></div></div><div class="legend">
+      <div class="legenditem"><i class="dot" style="background:#1f6f5b"></i><div><b>$36.000</b>Profesional · 51,7%</div></div><div class="legenditem"><i class="dot" style="background:#b3d875"></i><div><b>$4.872</b>Club · 7%</div></div><div class="legenditem"><i class="dot" style="background:#a7aea6"></i><div><b>$800</b>Traslados</div></div><div class="legenditem"><i class="dot" style="background:#f6a489"></i><div><b>$4.176</b>IIBB + medios de pago</div></div><div class="legenditem"><i class="dot" style="background:#d6cef2"></i><div><b>$23.752</b>Tarifa de Salto Propio · IVA incl.</div></div></div>
+      <div class="pro-steps"><span>Lo que cobra el profesional:</span><div class="ps"><b>45%</b>original</div>→<div class="ps"><b>50%</b>$34.800 · Entrega 3</div>→<div class="ps now"><b>51,7%</b>$36.000 · ahora</div></div></div>
+    <div class="profit-card"><div class="eyebrow">2 · De la tarifa a la contribución</div><div class="casc">
+      <div class="crow"><div class="ct">Tarifa de Salto Propio<b>$23.752</b></div><div class="cbar"><i style="width:100%"></i></div></div>
+      <div class="crow"><div class="ct">Neta de IVA<b>$19.630</b></div><div class="cbar"><i style="width:82.6%"></i></div></div>
+      <div class="crow"><div class="ct">Menos insumos<b>−$12.223</b></div><div class="cbar"><i class="neg" style="width:51.5%"></i></div></div>
+      <div class="crow res"><div class="ct">Contribución por visita<b data-cu="7407" data-pre="$">$7.407</b></div><div class="cbar"><i class="res" style="width:31.2%"></i></div></div>
+      <div class="cnote">Es una contribución: no es el ingreso total ni el beneficio neto.</div></div></div>
+  </div>
+  <div class="s5notes"><div class="snote"><span class="ic">🍱</span><span>Viandas y préstamos de los aliados <b>no son ingresos</b> de Salto Propio.</span></div><div class="snote"><span class="ic">📦</span><span><b>Sin comisión del 15%</b> a los mayoristas: el beneficio va al emprendedor.</span></div></div>
+  <div class="foot"><span></span><span class="slidex">05 / 07</span></div>
+</section>
+<section class="slide dark s6" aria-label="Proyección económica año 5 y punto de equilibrio"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
+  <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
+  <h2 class="n-h2">Más red. <span class="italic lime">Mejor ocupación.</span></h2>
+  <div class="b3row"><div class="b3"><b data-cu="40">40</b><span>clubes</span></div><div class="b3"><b data-cu="154">154</b><span>profesionales activos promedio</span></div><div class="b3"><b data-cu="40876">40.876</b><span>visitas anuales · escenario base</span></div></div>
+  <div class="s6cols"><div>
+    <div class="lev"><div class="lv"><b>+10%</b><p>Visitas: de 40.876 a 44.964</p></div><div class="lv"><b>−$25 M</b><p>Costos fijos: de $235 M a $210 M</p></div></div>
+    <div class="eb"><div class="lbl">EBITDA · Año 5</div><div class="ebr"><span>Base</span><div class="tr"><i style="width:55.1%"></i></div><b>$67,8 M</b></div><div class="ebr"><span>Optimizado</span><div class="tr"><i class="o" style="width:100%"></i></div><b style="color:var(--lime)">$123 M</b></div></div>
+    <div class="eq"><b>Año 3</b><p>Primer año con EBITDA positivo (antes: Año 4). Optimizado: 98 profesionales cubren los costos fijos.</p></div>
+    <p class="n6warn">Escenario sujeto a mayor ocupación de turnos y eficiencias de costos; no son resultados garantizados.</p></div>
+  <div class="chartcard"><h4>EBITDA por año: positivo desde el Año 3, antes desde el Año 4</h4><div class="cs">Barras: EBITDA ($ M) · abajo: profesionales activos · Año 5: base + mejoras</div><svg viewBox="0 0 560 300" role="img" aria-label="EBITDA por año en millones de pesos y profesionales activos: con valor sistémico el EBITDA es positivo desde el Año 3; antes, desde el Año 4"><rect x="84" y="264" width="436" height="28" rx="9" fill="#e9efe6"/><line x1="84" x2="520" y1="170" y2="170" stroke="#52655b" stroke-width="1.5"/><text x="4" y="174" font-size="12" font-weight="700" fill="#52655b">EBITDA $ M</text><text x="4" y="283" font-size="12" font-weight="700" fill="#52655b">Profesionales</text><rect class="gb gn" style="animation-delay:0.50s" x="98" y="170" width="44" height="44.4" rx="3" fill="#f98667"/><text class="pp" style="animation-delay:0.90s" x="120" y="230.4" font-size="15" font-weight="850" text-anchor="middle" fill="#c2492d">−44,4</text><text x="120" y="256" font-size="14" font-weight="600" text-anchor="middle" fill="#52655b">Año 1</text><text class="pp" style="animation-delay:1.20s" x="120" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">18</text><rect class="gb gn" style="animation-delay:0.68s" x="188" y="170" width="44" height="7.5" rx="3" fill="#f98667"/><text class="pp" style="animation-delay:1.08s" x="210" y="193.5" font-size="15" font-weight="850" text-anchor="middle" fill="#c2492d">−7,5</text><text x="210" y="256" font-size="14" font-weight="600" text-anchor="middle" fill="#52655b">Año 2</text><text class="pp" style="animation-delay:1.32s" x="210" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">50</text><rect class="gb" style="animation-delay:0.86s" x="278" y="149.9" width="44" height="20.1" rx="3" fill="#1f6f5b"/><text class="pp" style="animation-delay:1.26s" x="300" y="142.9" font-size="15" font-weight="850" text-anchor="middle" fill="#1f6f5b">+20,1</text><text x="300" y="256" font-size="14" font-weight="800" text-anchor="middle" fill="#52655b">Año 3</text><text class="pp" style="animation-delay:1.44s" x="300" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">85</text><rect class="gb" style="animation-delay:1.04s" x="368" y="114.9" width="44" height="55.1" rx="3" fill="#1f6f5b"/><text class="pp" style="animation-delay:1.44s" x="390" y="107.9" font-size="15" font-weight="850" text-anchor="middle" fill="#1f6f5b">+55,1</text><text x="390" y="256" font-size="14" font-weight="800" text-anchor="middle" fill="#52655b">Año 4</text><text class="pp" style="animation-delay:1.56s" x="390" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">125</text><rect class="gb" style="animation-delay:1.22s" x="458" y="102.2" width="44" height="67.8" rx="3" fill="#1f6f5b"/><text x="480" y="256" font-size="14" font-weight="600" text-anchor="middle" fill="#52655b">Año 5</text><text class="pp" style="animation-delay:1.68s" x="480" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">154</text><rect class="gb" style="animation-delay:1.5s" x="458" y="47" width="44" height="55.2" rx="3" fill="#b8d95a"/><text x="480" y="143" font-size="13" font-weight="800" text-anchor="middle" fill="#fff">67,8</text><text class="pp" style="animation-delay:1.8s" x="480" y="40" font-size="15" font-weight="850" text-anchor="middle" fill="#1f6f5b">$123 M</text><line x1="296" x2="296" y1="30" y2="128" stroke="#1f6f5b" stroke-width="1.5" stroke-dasharray="3 3"/><line x1="392" x2="392" y1="30" y2="92" stroke="#8a9a94" stroke-width="1.5" stroke-dasharray="3 3"/><g class="pp" style="animation-delay:1.1s"><rect x="248" y="6" width="96" height="24" rx="12" fill="#dbf26a"/><text x="296" y="23" font-size="14" font-weight="850" text-anchor="middle" fill="#112d2a">Ahora: Año 3</text></g><g class="pp" style="animation-delay:1.3s"><rect x="346" y="6" width="92" height="24" rx="12" fill="#cfd6d0"/><text x="392" y="23" font-size="14" font-weight="800" text-anchor="middle" fill="#3e4f49">Antes: Año 4</text></g></svg></div></div>
+  <div class="foot"><span></span><span class="slidex">06 / 07</span></div>
+</section>
+<section class="slide cream" aria-label="Comparación entre reconfiguración de valor y valor sistémico"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
+  <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
+  <h2 class="n-h2" style="font-size:44px">De reconfiguración a valor sistémico.<br><span class="italic" style="color:#367a5d">Un mismo propósito.</span></h2>
+  <table class="s7t"><thead><tr><th>Indicador · Año 5</th><th>Reconfiguración de valor</th><th class="sys">Valor sistémico</th></tr></thead><tbody>
+  <tr><td>Profesionales activos</td><td>100</td><td>154<span class="d">+54</span></td></tr>
+  <tr><td>ODS</td><td>4 y 8</td><td>1, 2, 4 y 8<span class="d">+2 ODS</span></td></tr>
+  <tr><td>EBITDA</td><td>$120 M</td><td>$123 M<span class="d">+$3 M</span></td></tr>
+  <tr><td>Primer año con EBITDA positivo</td><td>Año 4</td><td>Año 3<span class="d">1 año antes</span></td></tr></tbody></table>
+  <div class="s7msg">La mejora de EBITDA es moderada; la diferencia está en el <b>alcance</b> y la <b>velocidad</b>.</div>
+  <div class="s7close"><b>Salto Propio conecta recursos que ya existen</b> para mejorar las condiciones que permiten sostener y desarrollar un emprendimiento.</div>
+  <div class="foot"><span></span><span class="slidex">07 / 07</span></div>
+</section>
+
+
+<div id="hud" aria-label="Controles de presentación"><button class="ctrl" id="prev" title="Anterior (←)" aria-label="Anterior">←</button><button class="ctrl" id="next" title="Siguiente (→)" aria-label="Siguiente">→</button><button class="ctrl" id="fullBtn" title="Pantalla completa (F)" aria-label="Pantalla completa">⛶</button></div><div id="progress"></div>
+</main></div><script>
+(function(){const slides=[...document.querySelectorAll('.slide')];let current=0;function resize(){document.getElementById('stage').style.transform='scale('+Math.min(innerWidth/1280,innerHeight/720)+')'}function show(i){current=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>{s.classList.toggle('active',j===current);s.setAttribute('aria-hidden',String(j!==current))});document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';document.getElementById('prev').disabled=current===0;document.getElementById('next').disabled=current===slides.length-1}document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('fullBtn').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()};document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}else if(e.key.toLowerCase()==='f'){document.getElementById('fullBtn').click()}});addEventListener('resize',resize);resize();show(0)})();
+(function(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const f=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');function run(s){s.querySelectorAll('[data-cu]').forEach(e=>{const to=+e.dataset.cu,pre=e.dataset.pre||'',t0=performance.now();(function st(t){const k=Math.min(1,(t-t0)/1100),v=to*(1-Math.pow(1-k,3));e.textContent=pre+f(v);if(k<1)requestAnimationFrame(st)})(t0)})}new MutationObserver(m=>m.forEach(r=>{const s=r.target;if(s.classList&&s.classList.contains('slide')&&s.classList.contains('active'))run(s)})).observe(document.getElementById('stage'),{subtree:true,attributes:true,attributeFilter:['class']})})();
+</script></body></html>
