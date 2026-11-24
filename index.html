@@ -187,6 +187,12 @@
 .deco .o2{width:16px;height:16px;border-radius:50%;background:var(--dot);right:46px;bottom:150px;animation:drift 11s ease-in-out -3s infinite}
 .deco .o3{width:28px;height:28px;border-radius:50%;background:var(--d2);opacity:.5;left:26px;top:290px;animation:drift 13s ease-in-out -6s infinite}
 .deco .pl{width:46px;height:46px;border-radius:50%;border:3px solid var(--d1);left:52%;bottom:14px;animation:pulse 3.2s ease-out infinite}
+
+/* ===== slide final ===== */
+@keyframes hop{0%,55%,100%{transform:translateY(0)}25%{transform:translateY(-11px)}40%{transform:translateY(2px)}}@keyframes ringp{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.55);opacity:0}}
+.ty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px}.ty h1{font-size:176px;letter-spacing:-9px;line-height:.95;color:var(--ink)}
+.brandrow{display:flex;align-items:center;gap:22px}.brandrow span{font-size:38px;font-weight:850;letter-spacing:7px;color:#1f6f5b}
+.logo .larrow{animation:hop 2.2s ease-in-out infinite}.logo .lpulse{transform-box:fill-box;transform-origin:center;animation:ringp 2.2s ease-out infinite}
 </style></head><body>
 <div id="app"><main id="stage" role="region" aria-label="Salto Propio · Valor sistémico">
 <section class="slide dark active" aria-label="Portada: Salto Propio"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
@@ -194,7 +200,7 @@
   <div class="hero-ring" aria-hidden="true"></div>
   <div class="hero-copy"><h1>Del oficio a la <span class="italic lime">independencia.</span></h1><p class="sub">Una red de alianzas para emprender sin empezar de cero.</p></div>
   <div class="orb a">CLUBES<small>Espacios disponibles</small></div><div class="orb b">ALIADOS<small>Capacidades compartidas</small></div><div class="orb c">PERSONAS<small>Talento y oficios</small></div>
-  <div class="hero-chip">ODS 1 · 2 · 4 · 8</div><div class="foot"><span>Sustentabilidad y Empresa · Grupo 2</span><span class="slidex">01 / 07</span></div>
+  <div class="hero-chip">ODS 1 · 2 · 4 · 8</div><div class="foot"><span>Sustentabilidad y Empresa · Grupo 2</span><span class="slidex">01 / 08</span></div>
 </section>
 <section class="slide cream" aria-label="ODS originales, poverty penalty y propósito"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
   <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
@@ -202,7 +208,7 @@
   <div class="context-wrap">
     <div class="context-main"><span class="label">Nuestro propósito</span><div class="intro-quote">Ayudar a trabajadores en relación de dependencia que poseen un oficio, habilidad o experiencia a transformar ese conocimiento en un emprendimiento propio, reduciendo las barreras de capital, tiempo y riesgo que dificultan su transición hacia la independencia laboral.</div><div class="sdg-inline"><span><b>ODS 4</b> · Meta 4.4</span><span><b>ODS 8</b> · Metas 8.5 y 8.6</span></div></div>
     <div class="context-right"><div class="context-item"><span class="mini-tag">Poverty penalty</span><strong>Emprender cuesta más cuando tenés menos recursos.</strong><p>Un local, herramientas y compras pequeñas pueden convertir la falta de capital en una barrera adicional.</p></div><div class="context-item"><span class="mini-tag">Nuestra respuesta inicial</span><strong>Activar lo que ya existe.</strong><p>Clubes aportan espacio y socios; mayoristas, insumos; Salto Propio, coordinación y reservas.</p></div></div>
-  </div><div class="foot"><span></span><span class="slidex">02 / 07</span></div>
+  </div><div class="foot"><span></span><span class="slidex">02 / 08</span></div>
 </section>
 <section class="slide peach" aria-label="Problemas nuevos y nuevos ODS"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
   <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
@@ -213,7 +219,7 @@
     <article class="new-card"><div class="new-icon">↗</div><h3>Tiempo y traslados</h3><p>Menos viajes durante la jornada. Se explora una alianza de movilidad, todavía fuera del modelo económico.</p></article>
   </div>
   <div class="ods-new"><span><b>ODS 1 · Meta 1.4</b> — Acceso a servicios financieros</span><span><b>ODS 2 · Meta 2.1</b> — Alimentación adecuada y accesible</span></div>
-  <div class="foot"><span></span><span class="slidex">03 / 07</span></div>
+  <div class="foot"><span></span><span class="slidex">03 / 08</span></div>
 </section>
 <section class="slide lavender" aria-label="Alianzas de valor sistémico"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
   <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
@@ -223,7 +229,7 @@
     <article class="ally"><div class="ally-sticker">✳</div><span class="ally-num">02 / PRO MUJER</span><h3>Crédito + red profesional</h3><p class="mini">Salto Propio deriva potenciales solicitantes; Pro Mujer podría derivar peluqueras y esteticistas que ya emprenden, pero no tienen local.</p><div class="large-stat">8</div><div class="stat-caption">Incorporaciones proyectadas al año 5</div><div class="ally-bottom">Posicionamiento institucional + nuevas profesionales · Sin comisiones financieras ni créditos garantizados</div></article>
   </div>
   <div class="allies-future"><strong>Próxima exploración</strong><span>→ Movilidad con Uber o DiDi para agrupar viajes; no se incluyen descuentos hipotéticos en las proyecciones.</span></div>
-  <div class="foot"><span></span><span class="slidex">04 / 07</span></div>
+  <div class="foot"><span></span><span class="slidex">04 / 08</span></div>
 </section>
 <section class="slide mint s5" aria-label="Modelo económico por visita"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
   <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
@@ -240,7 +246,7 @@
       <div class="cnote">Es una contribución: no es el ingreso total ni el beneficio neto.</div></div></div>
   </div>
   <div class="s5notes"><div class="snote"><span class="ic">🍱</span><span>Viandas y préstamos de los aliados <b>no son ingresos</b> de Salto Propio.</span></div><div class="snote"><span class="ic">📦</span><span><b>Sin comisión del 15%</b> a los mayoristas: el beneficio va al emprendedor.</span></div></div>
-  <div class="foot"><span></span><span class="slidex">05 / 07</span></div>
+  <div class="foot"><span></span><span class="slidex">05 / 08</span></div>
 </section>
 <section class="slide dark s6" aria-label="Proyección económica año 5 y punto de equilibrio"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
   <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
@@ -252,7 +258,7 @@
     <div class="eq"><b>Año 3</b><p>Primer año con EBITDA positivo (antes: Año 4). Optimizado: 98 profesionales cubren los costos fijos.</p></div>
     <p class="n6warn">Escenario sujeto a mayor ocupación de turnos y eficiencias de costos; no son resultados garantizados.</p></div>
   <div class="chartcard"><h4>EBITDA por año: positivo desde el Año 3, antes desde el Año 4</h4><div class="cs">Barras: EBITDA ($ M) · abajo: profesionales activos · Año 5: base + mejoras</div><svg viewBox="0 0 560 300" role="img" aria-label="EBITDA por año en millones de pesos y profesionales activos: con valor sistémico el EBITDA es positivo desde el Año 3; antes, desde el Año 4"><rect x="84" y="264" width="436" height="28" rx="9" fill="#e9efe6"/><line x1="84" x2="520" y1="170" y2="170" stroke="#52655b" stroke-width="1.5"/><text x="4" y="174" font-size="12" font-weight="700" fill="#52655b">EBITDA $ M</text><text x="4" y="283" font-size="12" font-weight="700" fill="#52655b">Profesionales</text><rect class="gb gn" style="animation-delay:0.50s" x="98" y="170" width="44" height="44.4" rx="3" fill="#f98667"/><text class="pp" style="animation-delay:0.90s" x="120" y="230.4" font-size="15" font-weight="850" text-anchor="middle" fill="#c2492d">−44,4</text><text x="120" y="256" font-size="14" font-weight="600" text-anchor="middle" fill="#52655b">Año 1</text><text class="pp" style="animation-delay:1.20s" x="120" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">18</text><rect class="gb gn" style="animation-delay:0.68s" x="188" y="170" width="44" height="7.5" rx="3" fill="#f98667"/><text class="pp" style="animation-delay:1.08s" x="210" y="193.5" font-size="15" font-weight="850" text-anchor="middle" fill="#c2492d">−7,5</text><text x="210" y="256" font-size="14" font-weight="600" text-anchor="middle" fill="#52655b">Año 2</text><text class="pp" style="animation-delay:1.32s" x="210" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">50</text><rect class="gb" style="animation-delay:0.86s" x="278" y="149.9" width="44" height="20.1" rx="3" fill="#1f6f5b"/><text class="pp" style="animation-delay:1.26s" x="300" y="142.9" font-size="15" font-weight="850" text-anchor="middle" fill="#1f6f5b">+20,1</text><text x="300" y="256" font-size="14" font-weight="800" text-anchor="middle" fill="#52655b">Año 3</text><text class="pp" style="animation-delay:1.44s" x="300" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">85</text><rect class="gb" style="animation-delay:1.04s" x="368" y="114.9" width="44" height="55.1" rx="3" fill="#1f6f5b"/><text class="pp" style="animation-delay:1.44s" x="390" y="107.9" font-size="15" font-weight="850" text-anchor="middle" fill="#1f6f5b">+55,1</text><text x="390" y="256" font-size="14" font-weight="800" text-anchor="middle" fill="#52655b">Año 4</text><text class="pp" style="animation-delay:1.56s" x="390" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">125</text><rect class="gb" style="animation-delay:1.22s" x="458" y="102.2" width="44" height="67.8" rx="3" fill="#1f6f5b"/><text x="480" y="256" font-size="14" font-weight="600" text-anchor="middle" fill="#52655b">Año 5</text><text class="pp" style="animation-delay:1.68s" x="480" y="283" font-size="15" font-weight="850" text-anchor="middle" fill="#112d2a">154</text><rect class="gb" style="animation-delay:1.5s" x="458" y="47" width="44" height="55.2" rx="3" fill="#b8d95a"/><text x="480" y="143" font-size="13" font-weight="800" text-anchor="middle" fill="#fff">67,8</text><text class="pp" style="animation-delay:1.8s" x="480" y="40" font-size="15" font-weight="850" text-anchor="middle" fill="#1f6f5b">$123 M</text><line x1="296" x2="296" y1="30" y2="128" stroke="#1f6f5b" stroke-width="1.5" stroke-dasharray="3 3"/><line x1="392" x2="392" y1="30" y2="92" stroke="#8a9a94" stroke-width="1.5" stroke-dasharray="3 3"/><g class="pp" style="animation-delay:1.1s"><rect x="248" y="6" width="96" height="24" rx="12" fill="#dbf26a"/><text x="296" y="23" font-size="14" font-weight="850" text-anchor="middle" fill="#112d2a">Ahora: Año 3</text></g><g class="pp" style="animation-delay:1.3s"><rect x="346" y="6" width="92" height="24" rx="12" fill="#cfd6d0"/><text x="392" y="23" font-size="14" font-weight="800" text-anchor="middle" fill="#3e4f49">Antes: Año 4</text></g></svg></div></div>
-  <div class="foot"><span></span><span class="slidex">06 / 07</span></div>
+  <div class="foot"><span></span><span class="slidex">06 / 08</span></div>
 </section>
 <section class="slide cream" aria-label="Comparación entre reconfiguración de valor y valor sistémico"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div>
   <div class="topbar"><div class="brandline"><span class="brandmark">↗</span>SALTO PROPIO</div></div>
@@ -264,9 +270,11 @@
   <tr><td>Primer año con EBITDA positivo</td><td>Año 4</td><td>Año 3<span class="d">1 año antes</span></td></tr></tbody></table>
   <div class="s7msg">La mejora de EBITDA es moderada; la diferencia está en el <b>alcance</b> y la <b>velocidad</b>.</div>
   <div class="s7close"><b>Salto Propio conecta recursos que ya existen</b> para mejorar las condiciones que permiten sostener y desarrollar un emprendimiento.</div>
-  <div class="foot"><span></span><span class="slidex">07 / 07</span></div>
+  <div class="foot"><span></span><span class="slidex">07 / 08</span></div>
 </section>
 
+
+<section class="slide cream" aria-label="Gracias"><div class="deco" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="pl"></i></div><div class="ty"><h1>GRACIAS</h1><div class="brandrow"><svg class="logo" viewBox="0 0 72 72" width="92" height="92" aria-hidden="true"><circle class="lpulse" cx="36" cy="36" r="30" fill="none" stroke="#1f6f5b" stroke-width="2"/><circle cx="36" cy="36" r="31" fill="none" stroke="#1f6f5b" stroke-width="5"/><g class="larrow"><path d="M36 50V23M24 35l12-12 12 12" fill="none" stroke="#1f6f5b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><span>SALTO PROPIO</span></div></div></section>
 
 <div id="hud" aria-label="Controles de presentación"><button class="ctrl" id="prev" title="Anterior (←)" aria-label="Anterior">←</button><button class="ctrl" id="next" title="Siguiente (→)" aria-label="Siguiente">→</button><button class="ctrl" id="fullBtn" title="Pantalla completa (F)" aria-label="Pantalla completa">⛶</button></div><div id="progress"></div>
 </main></div><script>
